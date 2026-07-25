@@ -1,1 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — MOMENTS</title>
+<style>
+  :root {
+    --coral:   #D63030;
+    --bg:      #FFFFFF;
+    --card:    #F9F9FB;
+    --text:    #111111;
+    --sub:     #4B5563;
+    --muted:   #71717A;
+    --border:  #E5E7EB;
+    --radius:  10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:     #0F0F13;
+      --card:   #1A1A22;
+      --text:   #F2F2F7;
+      --sub:    #D1D5DB;
+      --muted:  #9CA3AF;
+      --border: #2A2A35;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 1rem 4rem;
+  }
+  .page { max-width: 680px; margin: 0 auto; }
+  .site-header {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .brand {
+    font-size: 1.1rem; font-weight: 900; letter-spacing: 0.25em;
+    color: var(--coral); text-decoration: none; display: block; margin-bottom: 1.25rem;
+  }
+  .site-header h1 {
+    font-size: 2rem; font-weight: 800; color: var(--text);
+    line-height: 1.2; text-wrap: balance; margin-bottom: 0.5rem;
+  }
+  .meta { font-size: 0.875rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  section { margin-bottom: 2.5rem; }
+  section + section { padding-top: 2rem; border-top: 1px solid var(--border); }
+  h2 {
+    font-size: 1rem; font-weight: 700; color: var(--coral);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+  }
+  p { color: var(--sub); margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+  .data-table {
+    width: 100%; border-collapse: collapse; font-size: 0.9rem;
+    margin: 0.5rem 0 1rem; overflow-x: auto; display: block;
+  }
+  .data-table th {
+    text-align: left; padding: 0.6rem 0.8rem; font-weight: 700; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+    border-bottom: 2px solid var(--border); white-space: nowrap;
+  }
+  .data-table td {
+    padding: 0.65rem 0.8rem; color: var(--sub);
+    border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tbody tr:hover td { background: var(--card); }
+  .tag {
+    display: inline-block; font-size: 0.72rem; font-weight: 700;
+    padding: 0.15em 0.5em; border-radius: 4px; letter-spacing: 0.04em;
+  }
+  .tag-device   { background: #EFF6FF; color: #1D4ED8; }
+  .tag-account  { background: #F0FDF4; color: #15803D; }
+  .tag-location { background: #FFF7ED; color: #C2410C; }
+  .tag-content  { background: #FDF4FF; color: #7E22CE; }
+  .callout {
+    background: var(--card); border-left: 3px solid var(--coral);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem; margin: 1rem 0;
+  }
+  .callout p { color: var(--sub); margin: 0; }
+  .rights-list {
+    list-style: none; display: flex; flex-direction: column;
+    gap: 0.75rem; margin: 0.5rem 0;
+  }
+  .rights-list li { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--sub); }
+  .rights-list .bullet {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--coral); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 800; flex-shrink: 0; margin-top: 0.1em;
+  }
+  .contact-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 0.75rem;
+  }
+  .contact-card p { color: var(--sub); margin: 0 0 0.5rem; }
+  .contact-card a { color: var(--coral); font-weight: 600; text-decoration: none; }
+  .contact-card a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  @media (max-width: 500px) {
+    .site-header h1 { font-size: 1.6rem; }
+    .data-table { font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
 
+  <header class="site-header">
+    <span class="brand">MOMENTS.</span>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Effective date: July 25, 2026 &nbsp;·&nbsp; Last updated: July 25, 2026</p>
+  </header>
+
+  <section>
+    <h2>Who we are</h2>
+    <p>MOMENTS is a social app that helps people discover, plan, and share real-world activities with friends. This policy explains what personal data we collect when you use MOMENTS, why we collect it, and how you can control it.</p>
+    <p>When this policy says "we", "us", or "MOMENTS", it refers to the MOMENTS app and its developer. By using MOMENTS you agree to this policy.</p>
+  </section>
+
+  <section>
+    <h2>Data we collect</h2>
+    <p>We collect only what is necessary for the app to function. The table below summarises each category.</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>What</th><th>Category</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Email address, display name, profile photo, bio</td>
+          <td><span class="tag tag-account">Account</span></td>
+          <td>Create and identify your account</td>
+        </tr>
+        <tr>
+          <td>Photos you take or upload</td>
+          <td><span class="tag tag-content">Content</span></td>
+          <td>Attach photos to moments you post</td>
+        </tr>
+        <tr>
+          <td>Approximate and precise location</td>
+          <td><span class="tag tag-location">Location</span></td>
+          <td>Tag where moments happen; show you nearby activity</td>
+        </tr>
+        <tr>
+          <td>Activity participation and XP history</td>
+          <td><span class="tag tag-account">Account</span></td>
+          <td>Power the leaderboard and streak features</td>
+        </tr>
+        <tr>
+          <td>Direct messages and group chat content</td>
+          <td><span class="tag tag-content">Content</span></td>
+          <td>Deliver messages between users</td>
+        </tr>
+        <tr>
+          <td>Device type, OS version, push token</td>
+          <td><span class="tag tag-device">Device</span></td>
+          <td>Send push notifications; debug crashes</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>We do <strong>not</strong> collect advertising identifiers, sell your data to third parties, or build advertising profiles.</p>
+  </section>
+
+  <section>
+    <h2>How we use your data</h2>
+    <p>Your data is used solely to operate and improve MOMENTS:</p>
+    <ul style="padding-left:1.25rem; color:var(--sub); display:flex; flex-direction:column; gap:0.4rem; margin-top:0.25rem;">
+      <li>Authenticating your account and keeping it secure</li>
+      <li>Storing and displaying the moments and photos you post</li>
+      <li>Delivering direct messages and group chats between users</li>
+      <li>Showing your location on the map when you allow it</li>
+      <li>Computing XP scores and leaderboard rankings</li>
+      <li>Sending optional push notifications about friend requests and messages</li>
+      <li>Diagnosing technical errors to improve stability</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Third-party services</h2>
+    <p>MOMENTS is built on <strong>Supabase</strong> (database, authentication, and file storage) and <strong>Expo</strong> (push notifications). Your data is stored on Supabase infrastructure hosted in the EU (Ireland). Neither Supabase nor Expo sell your data.</p>
+    <p>Location geocoding uses the <strong>Nominatim / OpenStreetMap</strong> API. Only the coordinates you search are sent; no account information is attached to those requests.</p>
+    <div class="callout">
+      <p>We do not integrate any advertising networks, analytics SDKs that share data externally, or social login providers that track you across other apps.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Location data</h2>
+    <p>Precise location is requested only when you post a moment or view the map. You can deny or revoke location permission at any time in your device settings. Denying location does not prevent you from using the rest of the app.</p>
+    <p>Location data is stored as coordinates attached to the moments you post. If you delete a moment, its location data is deleted with it.</p>
+  </section>
+
+  <section>
+    <h2>Camera and photos</h2>
+    <p>Camera access is requested only when you tap "Post a Moment". Photos you capture or select are uploaded to secure Supabase storage and associated with your moment. If you delete a moment, its photos are permanently removed from storage.</p>
+    <p>We never access your camera or photo library in the background.</p>
+  </section>
+
+  <section>
+    <h2>Data retention</h2>
+    <p>Your data is retained for as long as your account is active. When you delete your account, all your profile information, moments, photos, messages, and participation history are permanently deleted within 30 days.</p>
+    <p>Anonymised, aggregated usage statistics (e.g. total moments posted per day) may be retained indefinitely as they cannot be linked to you.</p>
+  </section>
+
+  <section>
+    <h2>Your rights</h2>
+    <ul class="rights-list">
+      <li>
+        <span class="bullet">✓</span>
+        <span><strong>Access</strong> — you can view all your data from within the app at any time.</span>
+      </li>
+      <li>
+        <span class="bullet">✓</span>
+        <span><strong>Correction</strong> — you can update your name, bio, and photo in Settings → Edit Profile.</span>
+      </li>
+      <li>
+        <span class="bullet">✓</span>
+        <span><strong>Deletion</strong> — you can delete your account in Settings → Delete Account. This permanently erases all your data.</span>
+      </li>
+      <li>
+        <span class="bullet">✓</span>
+        <span><strong>Portability</strong> — contact us to request an export of your data in JSON format.</span>
+      </li>
+      <li>
+        <span class="bullet">✓</span>
+        <span><strong>Notifications</strong> — you can disable all push notifications in Settings → Notifications or your device settings.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Children's privacy</h2>
+    <p>MOMENTS is not directed at children under 13 (or under 16 where local law requires a higher age). We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>If we make material changes to this policy, we will notify you via an in-app notice at least 7 days before the change takes effect. The effective date at the top of this page will always reflect the current version.</p>
+    <p>Continued use of MOMENTS after the effective date constitutes acceptance of the updated policy.</p>
+  </section>
+
+  <section>
+    <h2>Contact us</h2>
+    <p>Questions, data requests, or concerns about this policy:</p>
+    <div class="contact-card">
+      <p><strong>MOMENTS App</strong></p>
+      <p>Email: <a href="mailto:leconbob25@gmail.com">leconbob25@gmail.com</a></p>
+      <p style="margin-top:0.5rem; font-size:0.875rem; color:var(--muted);">We aim to respond within 48 hours.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 MOMENTS. All rights reserved.</span>
+    <span>com.moments.app</span>
+  </footer>
+
+</div>
+</body>
+</html>
