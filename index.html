@@ -8,6 +8,15 @@
 <meta property="og:title" content="MOMENTS. Plan it. Do it. Remember it.">
 <meta property="og:description" content="Make the plan, go together, keep the memory. Launching first in Rotterdam.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://momentsapp-official.vercel.app/">
+<meta property="og:image" content="https://momentsapp-official.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MOMENTS. Plan it. Do it. Remember it.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://momentsapp-official.vercel.app/">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,6 +79,9 @@
   .form-note { font-size: 13px; color: var(--muted); margin-top: 14px; min-height: 1.4em; }
   .form-note.ok { color: var(--ink); font-weight: 600; }
   .form-note.err { color: var(--ink); font-weight: 600; }
+  .form-privacy { font-size: 13px; margin-top: 6px; }
+  .form-privacy a { color: var(--muted); text-underline-offset: 3px; }
+  .form-privacy a:hover { color: var(--ink); }
 
   /* ---------- Moment cards (hero visual) ---------- */
   .stack { position: relative; display: flex; flex-direction: column; gap: 14px; }
@@ -117,8 +129,8 @@
   .manifesto .label { color: #A1A1AA; }
   .nots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #2A2A2E; margin-top: clamp(48px, 7vw, 88px); border: 1px solid #2A2A2E; }
   .not { background: var(--night); padding: 32px 28px 36px; }
-  .not strong { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
-  .not strong s { text-decoration-color: var(--coral); text-decoration-thickness: 2px; color: #A1A1AA; }
+  .not strong { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; color: #fff; }
+  .not strong::before { content: ''; display: block; width: 24px; height: 3px; background: var(--coral); margin-bottom: 18px; }
   .not p { font-size: 15px; line-height: 1.6; color: #A1A1AA; }
 
   /* ---------- Rotterdam / final CTA ---------- */
@@ -169,13 +181,14 @@
     <div>
       <div class="eyebrow">Launching first in Rotterdam</div>
       <h1>Plan it.<br>Do it.<br><em>Remember it.</em></h1>
-      <p class="lede">MOMENTS turns "we should do something" into a time and a place. See what your friends are planning, join with one tap and sort out the details in the Moment's group chat. Afterwards, the photos stay with the plan instead of getting lost in five camera rolls.</p>
+      <p class="lede">Turn "we should do something" into a time and a place with your friends in Rotterdam. Join a plan with one tap, sort the details in its chat, and keep the photos together afterwards.</p>
       <form class="signup" data-source="hero" novalidate>
         <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Email address">
         <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit">Join the waitlist</button>
       </form>
-      <p class="form-note" aria-live="polite">One email when we launch. Nothing else.</p>
+      <p class="form-note" aria-live="polite">Be one of the first in when we launch. One email, no spam.</p>
+      <p class="form-privacy"><a href="privacy.html#waitlist">Privacy</a></p>
     </div>
 
     <div class="stack" aria-label="Example Moments, not real events">
@@ -238,19 +251,19 @@
 
 <section class="block manifesto">
   <div class="wrap">
-    <div class="label">What it isn't</div>
-    <h2>Your phone should get you out the door, <em>not keep you on the couch.</em></h2>
+    <div class="label">What it fixes</div>
+    <h2>Made to get you <em>out the door.</em></h2>
     <div class="nots">
       <div class="not">
-        <strong><s>Group chat limbo</s></strong>
+        <strong>Plans that die in the group chat</strong>
         <p>Every Moment has a time, a place and its own chat with just the people who are going.</p>
       </div>
       <div class="not">
-        <strong><s>Lost photos</s></strong>
+        <strong>Photos lost in camera rolls</strong>
         <p>Photos from a Moment stay with it, tagged with who was there, so you can find them next year.</p>
       </div>
       <div class="not">
-        <strong><s>Screen time</s></strong>
+        <strong>Time spent scrolling</strong>
         <p>We count success in hours you spend with people. Time on the app doesn't count.</p>
       </div>
     </div>
@@ -270,7 +283,8 @@
         <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit">Join the waitlist</button>
       </form>
-      <p class="form-note" aria-live="polite">One email when we launch. Nothing else.</p>
+      <p class="form-note" aria-live="polite">Be one of the first in when we launch. One email, no spam.</p>
+      <p class="form-privacy"><a href="privacy.html#waitlist">Privacy</a></p>
     </div>
   </div>
 </section>
