@@ -80,7 +80,8 @@
   .form-note.ok { color: var(--ink); font-weight: 600; }
   .form-note.err { color: var(--ink); font-weight: 600; }
   .form-privacy { font-size: 13px; margin-top: 6px; }
-  .form-privacy a { color: var(--muted); text-underline-offset: 3px; }
+  /* padding + negative margin: 24px tap target (WCAG 2.2) without moving the layout */
+  .form-privacy a { color: var(--muted); text-underline-offset: 3px; display: inline-block; padding: 3px 0; margin: -3px 0; min-height: 24px; }
   .form-privacy a:hover { color: var(--ink); }
 
   /* ---------- Post-signup feedback ---------- */
@@ -96,11 +97,11 @@
   .fb-pills input { position: absolute; opacity: 0; pointer-events: none; }
   .fb-pills span { display: inline-block; font-size: 14px; font-weight: 500; padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 999px; transition: border-color .15s, background .15s; }
   .fb-pills input:checked + span { border-color: var(--ink); background: var(--ink); color: #fff; }
-  .fb-pills input:focus-visible + span { box-shadow: 0 0 0 3px rgba(255,77,77,.35); }
+  .fb-pills input:focus-visible + span { outline: 2px solid var(--coral); outline-offset: 2px; }
   .fb-actions { display: flex; gap: 10px; align-items: center; }
   .fb-send { border: 0; background: var(--ink); color: #fff; font: 600 15px var(--sans); padding: 11px 20px; border-radius: 999px; cursor: pointer; }
   .fb-send:disabled { opacity: .6; cursor: default; }
-  .fb-skip { border: 0; background: none; color: var(--muted); font: 500 14px var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .fb-skip { border: 0; background: none; color: var(--muted); font: 500 14px var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; min-height: 24px; padding: 4px 0; }
   .fb-status { font-size: 13px; font-weight: 600; margin-top: 10px; min-height: 1em; }
   .fb-done { font-size: 15px; font-weight: 600; }
 
@@ -113,13 +114,14 @@
   .stack-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
   .card-when { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .card-when::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
-  .example-tag { margin-left: auto; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
+  .example-tag { margin-left: auto; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
   .card-title { font-size: 19px; font-weight: 700; letter-spacing: -0.015em; grid-column: 1; }
   .card-where { font-size: 14px; color: var(--muted); grid-column: 1; display: flex; align-items: center; gap: 8px; }
   .faces { display: inline-flex; }
   .faces span { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--paper); margin-left: -6px; }
   .faces span:first-child { margin-left: 0; }
-  .card-join { grid-column: 2; grid-row: 1 / span 3; background: var(--coral); color: #fff; font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 999px; }
+  /* near-black on coral: 5.8:1 at this small size (white was 3.3:1) */
+  .card-join { grid-column: 2; grid-row: 1 / span 3; background: var(--coral); color: var(--ink); font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 999px; }
   .card-join.joined { background: var(--paper-2); color: var(--ink); }
 
   /* ---------- Ticker ---------- */
@@ -155,7 +157,8 @@
   .not p { font-size: 15px; line-height: 1.6; color: #A1A1AA; }
 
   /* ---------- Rotterdam / final CTA ---------- */
-  .final { background: var(--paper-2); }
+  /* muted grey is 4.47:1 on paper-2; ink-2 is 7.0:1 */
+  .final { background: var(--paper-2); --muted: var(--ink-2); }
   .final-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: end; }
   .final p.sub { font-size: 18px; line-height: 1.6; color: var(--ink-2); margin: 24px 0 36px; max-width: 30em; }
 
