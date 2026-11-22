@@ -83,6 +83,27 @@
   .form-privacy a { color: var(--muted); text-underline-offset: 3px; }
   .form-privacy a:hover { color: var(--ink); }
 
+  /* ---------- Post-signup feedback ---------- */
+  .feedback { max-width: 480px; margin-top: 20px; padding: 22px 22px 18px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); text-align: left; }
+  .fb-title { font-size: 19px; font-weight: 700; letter-spacing: -0.015em; }
+  .fb-sub { font-size: 13px; color: var(--muted); margin: 4px 0 18px; }
+  .fb-q { display: block; border: 0; font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+  .fb-q legend { margin-bottom: 8px; }
+  .fb-q textarea { display: block; width: 100%; margin-top: 8px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; font: 400 15px var(--sans); color: var(--ink); resize: vertical; outline: 0; }
+  .fb-q textarea:focus { border-color: var(--coral); }
+  .fb-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fb-pills label { cursor: pointer; }
+  .fb-pills input { position: absolute; opacity: 0; pointer-events: none; }
+  .fb-pills span { display: inline-block; font-size: 14px; font-weight: 500; padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 999px; transition: border-color .15s, background .15s; }
+  .fb-pills input:checked + span { border-color: var(--ink); background: var(--ink); color: #fff; }
+  .fb-pills input:focus-visible + span { box-shadow: 0 0 0 3px rgba(255,77,77,.35); }
+  .fb-actions { display: flex; gap: 10px; align-items: center; }
+  .fb-send { border: 0; background: var(--ink); color: #fff; font: 600 15px var(--sans); padding: 11px 20px; border-radius: 999px; cursor: pointer; }
+  .fb-send:disabled { opacity: .6; cursor: default; }
+  .fb-skip { border: 0; background: none; color: var(--muted); font: 500 14px var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .fb-status { font-size: 13px; font-weight: 600; margin-top: 10px; min-height: 1em; }
+  .fb-done { font-size: 15px; font-weight: 600; }
+
   /* ---------- Moment cards (hero visual) ---------- */
   .stack { position: relative; display: flex; flex-direction: column; gap: 14px; }
   .card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 20px 22px; display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 32px -12px rgba(0,0,0,.12); }
@@ -304,12 +325,94 @@
   </div>
 </footer>
 
+<template id="feedback-tpl">
+  <form class="feedback" novalidate>
+    <p class="fb-title">Help decide what we build first</p>
+    <p class="fb-sub">Optional. Answer any of these, or skip.</p>
+    <label class="fb-q">What plan did you last fail to make happen with friends?
+      <textarea name="plan" rows="2" maxlength="500" placeholder="The brunch we talked about for a month…"></textarea>
+    </label>
+    <fieldset class="fb-q">
+      <legend>What should Moments do first?</legend>
+      <div class="fb-pills">
+        <label><input type="radio" name="build_first" value="plan_friends"><span>Make plans with friends faster</span></label>
+        <label><input type="radio" name="build_first" value="near_me"><span>Find things to do nearby</span></label>
+        <label><input type="radio" name="build_first" value="photos"><span>Keep our photos in one place</span></label>
+        <label><input type="radio" name="build_first" value="meet_people"><span>Meet new people in Rotterdam</span></label>
+      </div>
+    </fieldset>
+    <fieldset class="fb-q">
+      <legend>Which phone do you use?</legend>
+      <div class="fb-pills">
+        <label><input type="radio" name="platform" value="iphone"><span>iPhone</span></label>
+        <label><input type="radio" name="platform" value="android"><span>Android</span></label>
+      </div>
+    </fieldset>
+    <div class="fb-actions">
+      <button type="submit" class="fb-send">Send answers</button>
+      <button type="button" class="fb-skip">Skip</button>
+    </div>
+    <p class="fb-status" aria-live="polite"></p>
+  </form>
+</template>
+
 <script>
   // Waitlist → Supabase `waitlist` table (insert-only RLS; anon key is public by design)
   const SUPABASE_URL = 'https://rwoobxlmjpweueljpjbh.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3b29ieGxtanB3ZXVlbGpwamJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3OTc4NTQsImV4cCI6MjA5NTM3Mzg1NH0.Q0NF6zkWwQ7xkxhGql_N7nBFp11DPFmCjXXGxlh5pxk';
   const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   const ref = new URLSearchParams(location.search).get('ref');
+
+  const insert = (table, row) => fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify(row),
+  });
+
+  const uuid = () => crypto.randomUUID ? crypto.randomUUID()
+    : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+
+  // Optional "Help decide what we build first" questions → `waitlist_feedback` (insert-only RLS)
+  let feedbackCount = 0;
+  function showFeedback(after, waitlistId) {
+    const n = ++feedbackCount;
+    const panel = document.getElementById('feedback-tpl').content.firstElementChild.cloneNode(true);
+    panel.querySelectorAll('input[type=radio]').forEach(r => { r.name += '-' + n; });
+    after.after(panel);
+
+    const status = panel.querySelector('.fb-status');
+    const send = panel.querySelector('.fb-send');
+    const done = (msg) => { panel.innerHTML = ''; const p = document.createElement('p'); p.className = 'fb-done'; p.textContent = msg; panel.append(p); };
+    panel.querySelector('.fb-skip').addEventListener('click', () => panel.remove());
+
+    panel.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const picked = (name) => panel.querySelector(`input[name="${name}-${n}"]:checked`)?.value ?? null;
+      const row = {
+        waitlist_id: waitlistId,
+        last_failed_plan: panel.plan.value.trim().slice(0, 500) || null,
+        build_first: picked('build_first'),
+        platform: picked('platform'),
+      };
+      if (!row.last_failed_plan && !row.build_first && !row.platform) return panel.remove();
+
+      send.disabled = true; send.textContent = 'Sending…';
+      try {
+        const res = await insert('waitlist_feedback', row);
+        if (res.ok || res.status === 409) return done('Thanks, that helps.');
+        throw new Error(res.status);
+      } catch {
+        status.textContent = 'Couldn’t send that. Try again in a moment.';
+        send.disabled = false; send.textContent = 'Send answers';
+      }
+    });
+  }
 
   document.querySelectorAll('form.signup').forEach(form => {
     const note = form.nextElementSibling;
@@ -331,20 +434,16 @@
 
       btn.disabled = true; btn.textContent = 'Adding you…';
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-          method: 'POST',
-          headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-            Prefer: 'return=minimal',
-          },
-          body: JSON.stringify({ email, source: (ref || form.dataset.source).slice(0, 64) }),
-        });
+        // The id is generated here because the public key can't read the row back;
+        // it links the optional feedback answers to this signup.
+        const id = uuid();
+        const res = await insert('waitlist', { id, email, source: (ref || form.dataset.source).slice(0, 64) });
         if (res.ok || res.status === 409) {
           form.reset();
           say("You're on the list. See you out there.", 'ok');
           btn.textContent = 'You’re in ✓';
+          // 409 = already signed up, so no new row exists to attach answers to
+          if (res.ok) showFeedback(note.nextElementSibling, id);
           return;
         }
         throw new Error(res.status);
